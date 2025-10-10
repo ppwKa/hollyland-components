@@ -1,0 +1,60 @@
+---
+/**
+ * Hollyland Nav Count Down
+ * 全局导航栏倒计时
+ */
+
+//Layout引入
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+
+//样式引入
+import "../../styles/pages/NavCountDown.scss";
+
+const pageTitle = "HL Nav Count Down";
+const title = `<span>New</span> Product Coming`;
+const dayTitle = "Days";
+const hourTitle = "HRS";
+const minuteTitle = "MINS";
+const secondTitle = "SECS";
+---
+
+<DefaultLayout pageTitle={pageTitle}>
+  <div class="nav-count-down">
+    <!-- 前置版本使用bootstrap的断点判断 -->
+    <div class="container">
+      <div class="nav-count-down-wrapper">
+        <div class="nav-count-down-title" set:html={title}></div>
+        <div class="nav-count-down-clock">
+          <div class="nav-count-down-clock-timer">
+            <div class="nav-count-down-clock-number days-number"></div>
+            <div class="nav-count-down-clock-title">
+              {dayTitle}
+            </div>
+          </div>
+          <div class="nav-count-down-clock-timer">
+            <div class="nav-count-down-clock-number hours-number"></div>
+            <div class="nav-count-down-clock-title">
+              {hourTitle}
+            </div>
+          </div>
+          <div class="nav-count-down-clock-timer">
+            <div class="nav-count-down-clock-number minutes-number"></div>
+            <div class="nav-count-down-clock-title">
+              {minuteTitle}
+            </div>
+          </div>
+          <div class="nav-count-down-clock-timer">
+            <div class="nav-count-down-clock-number seconds-number"></div>
+            <div class="nav-count-down-clock-title">
+              {secondTitle}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DefaultLayout>
+
+<script>
+    import '../../scripts/pages/NavCountDown.js';
+</script>

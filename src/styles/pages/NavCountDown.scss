@@ -1,0 +1,82 @@
+.nav-count-down {
+	background: #000;
+	height: 64px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	z-index: 999;
+
+	.nav-count-down-wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		.nav-count-down-title {
+			color: #fff;
+			font-family: 'HarmonyOS Sans';
+			font-size: 16px;
+			font-style: normal;
+			font-weight: 700;
+			line-height: 36px;
+
+			span {
+				color: #E2211C;
+			}
+		}
+
+		.nav-count-down-clock {
+			display: flex;
+			gap: 60px;
+
+			.nav-count-down-clock-timer {
+				display: flex;
+				gap: 10px;
+				color: #fff;
+				font-family: 'HarmonyOS Sans';
+				font-size: 16px;
+				font-style: normal;
+				font-weight: 700;
+				line-height: 36px;
+
+				.nav-count-down-clock-number {
+					font-size: 32px;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 991px) {
+	.nav-count-down {
+		.nav-count-down-wrapper {
+			justify-content: center;
+
+			.nav-count-down-title {
+				display: none;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.nav-count-down {
+		height: 50px;
+
+		.nav-count-down-wrapper {
+			.nav-count-down-clock {
+				gap: 15px;
+
+				.nav-count-down-clock-timer {
+					gap: 5px;
+					align-items: baseline;
+					font-size: 14px;
+
+					.nav-count-down-clock-number {
+						font-size: 20px;
+					}
+				}
+			}
+		}
+	}
+}

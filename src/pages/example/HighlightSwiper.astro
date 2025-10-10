@@ -1,0 +1,138 @@
+---
+/**
+ * Hollyland Highlight Swiper
+ * 高亮轮播图
+ */
+
+//Layout引入
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+
+//样式引入
+import "../../styles/pages/HighlightSwiper.scss";
+
+const pageTitle = "HL Highlight Swiper";
+const link = "https://placehold.co/1260x680";
+const swiperTitle = "Highlight Swiper";
+const highlightsOverview = "Highlights Overview.";
+const watchFilm = "Watch the film";
+const length = 6;
+---
+
+<DefaultLayout pageTitle={pageTitle}>
+  <div class="highlight-swiper-container">
+    <div class="highlight-swiper-wrapper">
+      <div class="highlight-swiper-header">
+        <div class="highlight-swiper-title">{highlightsOverview}</div>
+        <a
+          href="javascript:void(0);"
+          class="highlight-swiper-watch-film"
+          data-id="watch-film"
+        >
+          <span>{watchFilm}</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+          >
+            <path
+              d="M10.0013 18.3333C14.6037 18.3333 18.3346 14.6023 18.3346 9.99996C18.3346 5.39758 14.6037 1.66663 10.0013 1.66663C5.39893 1.66663 1.66797 5.39758 1.66797 9.99996C1.66797 14.6023 5.39893 18.3333 10.0013 18.3333Z"
+              stroke="#0071E3"
+              stroke-width="1.25"
+              stroke-linejoin="round"></path>
+            <path
+              d="M8 10V6.93426C8 6.53491 8.44507 6.29672 8.77735 6.51823L11 8L13.376 9.58397C13.6728 9.78189 13.6728 10.2181 13.376 10.416L11 12L8.77735 13.4818C8.44507 13.7033 8 13.4651 8 13.0657V10Z"
+              fill="#0071E3"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="highlight-swiper-content">
+      <div class="swiper highlight-swiper">
+        <div class="swiper-wrapper">
+          {
+            Array.from({ length }).map((_, index) => (
+              <div class="swiper-slide">
+                <div class="slide-feature">
+                  <img
+                    decoding="async"
+                    loading="lazy"
+                    src={link}
+                    alt="Highlight Swiper"
+                  />
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <div class="swiper-control-pagination">
+        <div class="swiper-pagination-container">
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-control" data-state="paused">
+            <div class="icon-playing">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                fill="none"
+              >
+                <path
+                  d="M9 15V8.49683C9 6.95 10.6808 5.98869 12.014 6.77296L17.5 10L23.0694 13.2761C24.384 14.0494 24.384 15.9506 23.0694 16.7239L17.5 20L12.014 23.227C10.6808 24.0113 9 23.05 9 21.5032V15Z"
+                  fill="#555555"></path>
+              </svg>
+            </div>
+            <div class="icon-paused">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                fill="none"
+              >
+                <path
+                  d="M10 8L10 22"
+                  stroke="#555555"
+                  stroke-width="6"
+                  stroke-linecap="round"></path>
+                <path
+                  d="M20 8L20 22"
+                  stroke="#555555"
+                  stroke-width="6"
+                  stroke-linecap="round"></path>
+              </svg>
+            </div>
+            <div class="icon-replay">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                fill="none"
+              >
+                <path
+                  d="M22.0764 15.5929C22.0881 17.4314 21.3984 19.2744 20.0046 20.6861C17.2169 23.5095 12.6683 23.5384 9.84493 20.7507C7.02158 17.963 6.99265 13.4144 9.78032 10.591C11.1742 9.17936 12.9512 8.36423 14.7897 8.35256C15.7256 8.3466 18.1423 8.35256 18.1423 8.35256"
+                  stroke="#555555"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+                <path
+                  d="M14.8438 5L18.2308 8.38635L15.2703 11.7052"
+                  stroke="#555555"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DefaultLayout>
+
+<script>
+  import "../../scripts/pages/HighlightSwiper.js";
+</script>

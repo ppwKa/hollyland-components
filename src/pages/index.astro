@@ -1,0 +1,344 @@
+---
+import DefaultLayout from "../layouts/DefaultLayout.astro";
+import { readdir } from 'fs/promises';
+import { join } from 'path';
+
+// 获取所有.astro文件
+async function getAstroFiles() {
+  const pagesDir = join(process.cwd(), 'src', 'pages');
+  const files = await readdir(pagesDir, { recursive: true });
+  
+  return files
+    .filter(file => file.endsWith('.astro') && file !== 'index.astro')
+    .map(file => {
+      const path = file.replace(/\\/g, '/'); // 统一使用正斜杠
+      const name = file.replace('.astro', '').replace(/\\/g, '/');
+      return {
+        name: name.split('/').pop(), // 获取文件名（不含路径）
+        fullName: name, // 完整路径名
+        path: `/${path}` // 完整的URL路径
+      };
+    });
+}
+
+const astroFiles = await getAstroFiles();
+---
+
+<DefaultLayout pageTitle="组件实例">
+  <div class="pages-container">
+    <div class="search-section">
+      <h1>组件实例</h1>
+      <div class="search-box">
+        <input 
+          type="text" 
+          id="searchInput" 
+          placeholder="搜索组件..." 
+          class="search-input"
+        />
+        <button id="searchBtn" class="search-btn">搜索</button>
+        <button id="clearBtn" class="clear-btn">清除</button>
+      </div>
+    </div>
+
+    <div class="pages-grid" id="pagesGrid">
+      {astroFiles.map((file) => (
+        <div class="page-card" data-name={file.name.toLowerCase()}>
+          <h3 class="page-title">{file.name}</h3>
+          <p class="page-path">{file.path}</p>
+          <a href={file.path.replace('.astro', '')} class="page-link">访问页面</a>
+        </div>
+      ))}
+    </div>
+
+    <div class="pagination" id="pagination">
+      <button id="prevBtn" class="pagination-btn" disabled>上一页</button>
+      <div class="pagination-info">
+        <span id="pageInfo">第 1 页，{Math.ceil(astroFiles.length / 6)} 页</span>
+      </div>
+      <button id="nextBtn" class="pagination-btn" disabled>下一页</button>
+    </div>
+  </div>
+
+  <style>
+    .pages-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .search-section {
+      margin-bottom: 2rem;
+    }
+
+    .search-section h1 {
+      color: #333;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 0.75rem;
+      border: 2px solid #e1e5e9;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+
+    .search-btn, .clear-btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .search-btn {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .search-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .clear-btn {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .clear-btn:hover {
+      background-color: #545b62;
+    }
+
+    .pages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .page-card {
+      background: white;
+      border: 1px solid #e1e5e9;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .page-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .page-title {
+      color: #333;
+      margin: 0 0 0.5rem 0;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .page-path {
+      color: #666;
+      margin: 0 0 1rem 0;
+      font-size: 0.9rem;
+      font-family: 'Courier New', monospace;
+      background: #f8f9fa;
+      padding: 0.5rem;
+      border-radius: 4px;
+    }
+
+    .page-link {
+      display: inline-block;
+      background-color: #28a745;
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .page-link:hover {
+      background-color: #218838;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .pagination-btn {
+      padding: 0.5rem 1rem;
+      border: 1px solid #007bff;
+      background-color: white;
+      color: #007bff;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .pagination-btn:hover:not(:disabled) {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .pagination-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .pagination-info {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .page-card.hidden {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .pages-container {
+        padding: 1rem;
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+
+      .pages-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pagination {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+
+  <script type="module">
+    class PageManager {
+      constructor() {
+        this.currentPage = 1;
+        this.itemsPerPage = 6;
+        this.allCards = Array.from(document.querySelectorAll('.page-card'));
+        this.filteredCards = [...this.allCards];
+        
+        this.searchInput = document.getElementById('searchInput');
+        this.searchBtn = document.getElementById('searchBtn');
+        this.clearBtn = document.getElementById('clearBtn');
+        this.pagesGrid = document.getElementById('pagesGrid');
+        this.pagination = document.getElementById('pagination');
+        this.prevBtn = document.getElementById('prevBtn');
+        this.nextBtn = document.getElementById('nextBtn');
+        this.pageInfo = document.getElementById('pageInfo');
+        
+        this.init();
+      }
+
+      init() {
+        this.searchBtn.addEventListener('click', () => this.search());
+        this.clearBtn.addEventListener('click', () => this.clearSearch());
+        this.searchInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') this.search();
+        });
+        this.searchInput.addEventListener('input', () => this.search());
+        
+        this.prevBtn.addEventListener('click', () => this.previousPage());
+        this.nextBtn.addEventListener('click', () => this.nextPage());
+        
+        this.updateDisplay();
+      }
+
+      search() {
+        const query = this.searchInput.value.toLowerCase().trim();
+        
+        if (query === '') {
+          this.filteredCards = [...this.allCards];
+        } else {
+          this.filteredCards = this.allCards.filter(card => {
+            const name = card.dataset.name;
+            const path = card.querySelector('.page-path').textContent.toLowerCase();
+            return name.includes(query) || path.includes(query);
+          });
+        }
+        
+        this.currentPage = 1;
+        this.updateDisplay();
+      }
+
+      clearSearch() {
+        this.searchInput.value = '';
+        this.search();
+      }
+
+      previousPage() {
+        if (this.currentPage > 1) {
+          this.currentPage--;
+          this.updateDisplay();
+        }
+      }
+
+      nextPage() {
+        const totalPages = Math.ceil(this.filteredCards.length / this.itemsPerPage);
+        if (this.currentPage < totalPages) {
+          this.currentPage++;
+          this.updateDisplay();
+        }
+      }
+
+      updateDisplay() {
+        // 隐藏所有卡片
+        this.allCards.forEach(card => {
+          card.classList.add('hidden');
+        });
+
+        // 计算当前页的卡片
+        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+        const endIndex = startIndex + this.itemsPerPage;
+        const currentPageCards = this.filteredCards.slice(startIndex, endIndex);
+
+        // 显示当前页的卡片
+        currentPageCards.forEach(card => {
+          card.classList.remove('hidden');
+        });
+
+        // 更新分页信息
+        const totalPages = Math.ceil(this.filteredCards.length / this.itemsPerPage);
+        this.pageInfo.textContent = `第 ${this.currentPage} 页，共 ${totalPages} 页`;
+
+        // 更新分页按钮状态
+        this.prevBtn.disabled = this.currentPage === 1;
+        this.nextBtn.disabled = this.currentPage === totalPages || totalPages === 0;
+
+        // 如果没有结果，显示提示
+        if (this.filteredCards.length === 0) {
+          this.pageInfo.textContent = '没有找到匹配的页面';
+        }
+      }
+    }
+
+    // 页面加载完成后初始化
+    document.addEventListener('DOMContentLoaded', () => {
+      new PageManager();
+    });
+  </script>
+</DefaultLayout>

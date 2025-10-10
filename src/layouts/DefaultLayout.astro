@@ -1,0 +1,24 @@
+---
+import CDNAssets from "../components/CDNAssets.astro";
+
+const { pageTitle = "Home" } = Astro.props;
+//将pageTitle小写并将空格替换为-
+const classNames = pageTitle?.toLowerCase().replace(/\s+/g, "-") || "default";
+---
+
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <CDNAssets />
+  </head>
+  <body>
+    <div class={`hl-common-styles ${classNames}`}>
+      <slot />
+    </div>
+  </body>
+</html>
