@@ -1,0 +1,38 @@
+# build output
+# 忽略整个 dist 文件夹
+dist/**
+
+# 保留这几个子目录的本身
+!dist/product/
+!dist/events/
+
+# 保留子目录内的所有内容（子文件和子文件夹）
+!dist/product/**
+!dist/events/**
+
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+
+#public source
+public/images
+public/videos
+public/audios
