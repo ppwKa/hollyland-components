@@ -1,0 +1,233 @@
+.hl-scene-swiper {
+    padding-top: 150px;
+    padding-bottom: 150px;
+
+    .scene-swiper-container {
+        width: 100%;
+        height: 100%;
+
+        .scene-swiper-wrapper {
+            width: 100%;
+            //锚定swiper靠左对齐
+            max-width: 1060px;
+            margin: 0 auto;
+            text-align: left;
+
+            .scene-swiper-title {
+                color: rgba(21, 20, 19, 0.90);
+                font-family: "HarmonyOS Sans";
+                font-size: 48px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 120%;
+                letter-spacing: -1.44px;
+            }
+
+            .scene-swiper-description {
+                color: #6E6E73;
+                font-family: "HarmonyOS Sans";
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 28px;
+                letter-spacing: -0.6px;
+                margin-top: 30px;
+                margin-bottom: 40px;
+                padding-right: 80px;
+            }
+        }
+
+        .scene-swiper-content {
+            text-align: left;
+
+            .scene-swiper {
+                .swiper-wrapper {
+                    transition-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+                }
+
+                .swiper-slide {
+                    width: 100%;
+                    height: 100%;
+
+                    .slide-feature {
+                        width: 100%;
+                        padding-bottom: 100%;
+                        position: relative;
+                        overflow: hidden;
+                        border-radius: 28px;
+
+                        img {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+
+                    .slide-title {
+                        color: #6E6E73;
+                        font-family: "HarmonyOS Sans";
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: 20px;
+                        letter-spacing: -0.48px;
+                        margin-top: 30px;
+                        padding: 0 30px;
+                    }
+                }
+            }
+
+            .scene-swiper-btn {
+                width: 100%;
+                max-width: 1060px;
+                position: relative;
+                margin: 30px auto 0;
+                display: flex;
+                justify-content: flex-end;
+                gap: 16px;
+
+                .swiper-button-prev,
+                .swiper-button-next {
+                    position: relative;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                    margin-top: 0;
+                    width: 36px;
+                    height: 36px;
+
+                    &::after {
+                        display: none;
+                    }
+                }
+
+                .swiper-button-prev {
+                    background-image: url("data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0iMzYiIGhlaWdodD0iMzYiIHZpZXdCb3g9IjAgMCAzNiAzNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzU4NzE2XzM4MDUxKSI+CjxyZWN0IHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiIgcng9IjE4IiBmaWxsPSIjRDJEMkQ3IiBmaWxsLW9wYWNpdHk9IjAuNjQiLz4KPHBhdGggZD0iTTE5Ljk5OTkgMjVDMTkuNjE2MSAyNSAxOS4yMzIzIDI0Ljg1MzUgMTguOTM5NCAyNC41NjA1TDEzLjQzOTQgMTkuMDYwNUMxMi44NTM1IDE4LjQ3NTEgMTIuODUzNSAxNy41MjQ5IDEzLjQzOTQgMTYuOTM5NEwxOC45Mzk0IDExLjQzOTRDMTkuNTI1MyAxMC44NTM1IDIwLjQ3NDYgMTAuODUzNSAyMS4wNjA1IDExLjQzOTRDMjEuNjQ2NCAxMi4wMjQ4IDIxLjY0NjQgMTIuOTc1IDIxLjA2MDUgMTMuNTYwNUwxNi42MjEgMThMMjEuMDYwNSAyMi40Mzk1QzIxLjY0NjQgMjMuMDI0OSAyMS42NDY0IDIzLjk3NTEgMjEuMDYwNSAyNC41NjA2QzIwLjc2NzUgMjQuODUzNiAyMC4zODM2IDI1IDE5Ljk5OTkgMjVaIiBmaWxsPSJibGFjayIgZmlsbC1vcGFjaXR5PSIwLjU2Ii8+CjwvZz4KPGRlZnM+CjxjbGlwUGF0aCBpZD0iY2xpcDBfNTg3MTZfMzgwNTEiPgo8cmVjdCB3aWR0aD0iMzYiIGhlaWdodD0iMzYiIHJ4PSIxOCIgZmlsbD0id2hpdGUiLz4KPC9jbGlwUGF0aD4KPC9kZWZzPgo8L3N2Zz4K");
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                }
+
+                .swiper-button-next {
+                    background-image: url("data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0iMzYiIGhlaWdodD0iMzYiIHZpZXdCb3g9IjAgMCAzNiAzNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzU4NzE2XzM4MDU0KSI+CjxyZWN0IHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiIgcng9IjE4IiBmaWxsPSIjRDJEMkQ3IiBmaWxsLW9wYWNpdHk9IjAuNjQiLz4KPHBhdGggZD0iTTIyLjU1OTcgMTYuOTM3NUwxNy4wNTIxIDExLjQzNzVDMTYuNDY2NyAxMC44NTIxIDE1LjUxOTggMTAuODU1IDE0LjkzNjQgMTEuNDQxNEMxNC4zNTI5IDEyLjAyODMgMTQuMzU0OSAxMi45NzggMTQuOTQwMyAxMy41NjI1TDE5LjM4NDEgMThMMTQuOTQwMyAyMi40Mzc1QzE0LjM1NDkgMjMuMDIyIDE0LjM1MjkgMjMuOTcxNyAxNC45MzY0IDI0LjU1ODZDMTUuMjI4NiAyNC44NTMgMTUuNjEyNCAyNSAxNS45OTYyIDI1QzE2LjM3OCAyNSAxNi43NTk5IDI0Ljg1NDUgMTcuMDUyMSAyNC41NjI1TDIyLjU1OTcgMTkuMDYyNUMyMi44NDEyIDE4Ljc4MTMgMjMgMTguMzk4OSAyMyAxOEMyMyAxNy42MDExIDIyLjg0MTIgMTcuMjE4OCAyMi41NTk3IDE2LjkzNzVaIiBmaWxsPSJibGFjayIgZmlsbC1vcGFjaXR5PSIwLjU2Ii8+CjwvZz4KPGRlZnM+CjxjbGlwUGF0aCBpZD0iY2xpcDBfNTg3MTZfMzgwNTQiPgo8cmVjdCB3aWR0aD0iMzYiIGhlaWdodD0iMzYiIHJ4PSIxOCIgZmlsbD0id2hpdGUiLz4KPC9jbGlwUGF0aD4KPC9kZWZzPgo8L3N2Zz4K");
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .hl-scene-swiper {
+        .scene-swiper-container {
+            .scene-swiper-wrapper {
+                padding: 0 70px;
+
+                .scene-swiper-title {
+                    font-size: 60px;
+                    line-height: 120%;
+                    letter-spacing: -1.8px;
+                }
+
+                .scene-swiper-description {
+                    font-size: 32px;
+                    line-height: 120%;
+                    letter-spacing: -0.64px;
+                    margin: 50px auto;
+                    padding-right: 0;
+                    font-weight: 500;
+                }
+            }
+
+            .scene-swiper-content {
+                .scene-swiper {
+                    padding: 0 30px;
+
+                    .swiper-slide {
+                        border-radius: 28px;
+
+                        .slide-feature {
+                            border-radius: 28px;
+                        }
+
+                        .slide-title {
+                            font-size: 20px;
+                            line-height: 120%;
+                            letter-spacing: -0.4px;
+                            margin-top: 30px;
+                            padding: 0 40px;
+                        }
+                    }
+                }
+
+                .scene-swiper-btn {
+                    margin: 30px auto 0;
+                    gap: 16px;
+                    padding-right: 70px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .hl-scene-swiper {
+        .scene-swiper-container {
+            .scene-swiper-wrapper {
+                padding: 0 35px;
+
+                .scene-swiper-title {
+                    font-size: 30px;
+                    line-height: 120%;
+                    letter-spacing: -0.9px;
+                }
+
+                .scene-swiper-description {
+                    font-size: 16px;
+                    line-height: 130%;
+                    letter-spacing: -0.32px;
+                    margin: 25px auto;
+                }
+            }
+
+            .scene-swiper-content {
+                .scene-swiper {
+                    padding: 0 15px;
+
+                    .swiper-slide {
+                        border-radius: 12px;
+
+                        .slide-feature {
+                            border-radius: 12px;
+                        }
+
+                        .slide-title {
+                            font-size: 12px;
+                            line-height: 120%;
+                            letter-spacing: -0.2px;
+                            margin-top: 15px;
+                            padding: 0 20px;
+                        }
+                    }
+                }
+
+                .scene-swiper-btn {
+                    margin: 25px auto 0;
+                    gap: 10px;
+                    padding-right: 35px;
+
+                    .swiper-button-prev,
+                    .swiper-button-next {
+                        width: 30px;
+                        height: 30px;
+                    }
+                }
+            }
+        }
+    }
+}

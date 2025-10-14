@@ -1,0 +1,63 @@
+---
+/**
+ * Hollyland Scene Swiper
+ * 场景轮播图
+ */
+
+//Layout引入
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+
+//样式引入
+import "../../styles/pages/SceneSwiper.scss";
+
+const pageTitle = "HL Scene Swiper";
+const link = "https://placehold.co/500x500";
+const length = 3;
+const sceneSwiperTitle = "Scene Swiper";
+const sceneSwiperDescription =
+  "Scene Swiper is a type of slider that displays a series of images or videos in a horizontal or vertical direction.Scene Swiper is a type of slider that displays a series of images or videos in a horizontal or vertical direction.Scene Swiper is a type of slider that displays a series of images or videos in a horizontal or vertical direction.";
+---
+
+<DefaultLayout pageTitle={pageTitle}>
+  <div class="scene-swiper-container">
+    <div class="scene-swiper-wrapper">
+      <div class="scene-swiper-title">
+        {sceneSwiperTitle}
+      </div>
+      <div class="scene-swiper-description">
+        {sceneSwiperDescription}
+      </div>
+    </div>
+    <div class="scene-swiper-content">
+      <div class="swiper scene-swiper">
+        <div class="swiper-wrapper">
+          {
+            Array.from({ length }).map((_, index) => (
+              <div class="swiper-slide">
+                <div class="slide-feature">
+                  <img
+                    decoding="async"
+                    loading="lazy"
+                    src={link}
+                    alt="Scene Swiper"
+                  />
+                </div>
+                <div class="slide-info">
+                  <div class="slide-title">Scene Swiper Title</div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <div class="scene-swiper-btn">
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+  </div>
+</DefaultLayout>
+
+<script>
+    import "../../scripts/pages/SceneSwiper.js";
+</script>
