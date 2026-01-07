@@ -1,0 +1,78 @@
+---
+/**
+ * Hollyland Before After Compare
+ * 图片对比滑块组件
+ */
+
+ import DefaultLayout from "../../layouts/DefaultLayout.astro";
+import "../../styles/pages/BeforeAfterCompare.scss";
+
+const pageTitle = "HL Before After Compare";
+
+// 配置项
+interface CompareConfig {
+  beforeImage: string;
+  afterImage: string;
+  beforeLabel?: string;
+  afterLabel?: string;
+  initialPosition?: number; // 0-100, 默认50
+  direction?: "horizontal" | "vertical";
+}
+
+const config: CompareConfig = {
+  beforeImage: "https://placehold.co/1200x800/1a1a1a/666?text=Before",
+  afterImage: "https://placehold.co/1200x800/0071e3/fff?text=After",
+  beforeLabel: "降噪前",
+  afterLabel: "降噪后",
+  initialPosition: 50,
+  direction: "horizontal",
+};
+---
+
+<DefaultLayout pageTitle={pageTitle}>
+  <div class="compare-section">
+    <div class="container">
+      <div class="compare-header">
+        <h2 class="compare-title">智能降噪技术</h2>
+        <p class="compare-subtitle">拖动滑块，感受 AI 降噪带来的纯净音质</p>
+      </div>
+
+      <div
+        class="before-after-compare"
+        data-direction={config.direction}
+        data-initial={config.initialPosition}
+      >
+        <!-- Before 图层 -->
+        <div class="compare-before">
+          <img src={config.beforeImage} alt="Before" loading="lazy" />
+          {config.beforeLabel && (
+            <span class="compare-label before-label">{config.beforeLabel}</span>
+          )}
+        </div>
+
+        <!-- After 图层 -->
+        <div class="compare-after">
+          <img src={config.afterImage} alt="After" loading="lazy" />
+          {config.afterLabel && (
+            <span class="compare-label after-label">{config.afterLabel}</span>
+          )}
+        </div>
+
+        <!-- 拖动手柄 -->
+        <div class="compare-handle">
+          <div class="handle-line"></div>
+          <div class="handle-circle">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 5L3 12L8 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16 5L21 12L16 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DefaultLayout>
+
+<script>
+  import "../../scripts/pages/BeforeAfterCompare.js";
+</script>

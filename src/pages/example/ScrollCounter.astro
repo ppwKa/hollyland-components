@@ -1,0 +1,71 @@
+---
+/**
+ * Hollyland Scroll Counter
+ * 滚动数字计数器组件
+ */
+
+ import DefaultLayout from "../../layouts/DefaultLayout.astro";
+import "../../styles/pages/ScrollCounter.scss";
+
+const pageTitle = "HL Scroll Counter";
+
+// 计数器配置
+interface CounterItem {
+  value: number;
+  suffix?: string;
+  prefix?: string;
+  label: string;
+  decimals?: number;
+  duration?: number;
+}
+
+const counters: CounterItem[] = [
+  { value: 1000, suffix: "m", label: "传输距离", duration: 2000 },
+  { value: 15, suffix: "h", label: "超长续航", duration: 1500 },
+  { value: 67, suffix: "dB", label: "信噪比", duration: 1800 },
+  { value: 500, suffix: "ms", label: "超低延迟", prefix: "<", duration: 1600 },
+];
+
+const sectionTitle = "核心性能参数";
+const sectionSubtitle = "专业级性能，满足严苛拍摄需求";
+---
+
+<DefaultLayout pageTitle={pageTitle}>
+  <div class="counter-section">
+    <div class="container">
+      <div class="counter-header">
+        <h2 class="counter-title">{sectionTitle}</h2>
+        <p class="counter-subtitle">{sectionSubtitle}</p>
+      </div>
+
+      <div class="counter-grid">
+        {counters.map((counter) => (
+          <div class="counter-item">
+            <div class="counter-value-wrapper">
+              {counter.prefix && (
+                <span class="counter-prefix">{counter.prefix}</span>
+              )}
+              <span
+                class="counter-value"
+                data-target={counter.value}
+                data-decimals={counter.decimals || 0}
+                data-duration={counter.duration || 2000}
+              >
+                0
+              </span>
+              {counter.suffix && (
+                <span class="counter-suffix">{counter.suffix}</span>
+              )}
+            </div>
+            <div class="counter-label">{counter.label}</div>
+            <div class="counter-decoration"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</DefaultLayout>
+
+<script>
+  import "../../scripts/pages/ScrollCounter.js";
+</script>

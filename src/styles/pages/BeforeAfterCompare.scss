@@ -1,0 +1,224 @@
+/**
+ * Hollyland Before After Compare
+ * 图片对比滑块组件样式
+ */
+
+ .hl-before-after-compare {
+  .compare-section {
+    padding: 120px 0;
+    background: #000;
+
+    @media (max-width: 768px) {
+      padding: 60px 0;
+    }
+  }
+
+  .compare-header {
+    text-align: center;
+    margin-bottom: 60px;
+
+    @media (max-width: 768px) {
+      margin-bottom: 40px;
+    }
+  }
+
+  .compare-title {
+    color: #fff;
+    font-family: "HarmonyOS Sans SC";
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 16px;
+
+    @media (max-width: 768px) {
+      font-size: 28px;
+    }
+  }
+
+  .compare-subtitle {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 18px;
+    margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
+  }
+
+  // 主容器
+  .before-after-compare {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: ew-resize;
+    user-select: none;
+    -webkit-user-select: none;
+
+    // 触摸设备优化
+    touch-action: pan-y pinch-zoom;
+
+    @media (max-width: 768px) {
+      border-radius: 12px;
+    }
+
+    // 防止图片拖拽
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      pointer-events: none;
+      -webkit-user-drag: none;
+    }
+  }
+
+  // Before 图层（被裁切的）
+  .compare-before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 2;
+
+    // 默认显示50%
+    clip-path: inset(0 50% 0 0);
+    
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  // After 图层（底层完整图）
+  .compare-after {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  // 标签样式
+  .compare-label {
+    position: absolute;
+    top: 20px;
+    padding: 8px 16px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 10;
+    pointer-events: none;
+
+    @media (max-width: 768px) {
+      top: 12px;
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+  }
+
+  .before-label {
+    left: 20px;
+
+    @media (max-width: 768px) {
+      left: 12px;
+    }
+  }
+
+  .after-label {
+    right: 20px;
+
+    @media (max-width: 768px) {
+      right: 12px;
+    }
+  }
+
+  // 拖动手柄
+  .compare-handle {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    z-index: 10;
+    transform: translateX(-50%);
+    transition: left 0.05s ease-out;
+
+    // 拖拽时取消过渡
+    &.dragging {
+      transition: none;
+    }
+  }
+
+  .handle-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 3px;
+    height: 100%;
+    background: #fff;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .handle-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 48px;
+    height: 48px;
+    background: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      color: #333;
+    }
+
+    // 悬停效果
+    &:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      width: 40px;
+      height: 40px;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  // 拖拽中的状态
+  .before-after-compare.is-dragging {
+    cursor: grabbing;
+
+    .handle-circle {
+      transform: translate(-50%, -50%) scale(1.15);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+    }
+  }
+}

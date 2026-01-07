@@ -1,0 +1,126 @@
+---
+/**
+ * Hollyland Arrow Swiper
+ * 箭头导航轮播图组件
+ * 
+ * 特性：
+ * - 支持自定义标题
+ * - 左右箭头导航
+ * - 响应式布局（PC/移动端自动切换）
+ * - 非活动slide透明度变化
+ * - 对齐Bootstrap container
+ */
+
+//Layout引入
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+
+//样式引入
+import "../../styles/pages/ArrowSwiper.scss";
+
+// 组件配置
+const pageTitle = "HL Arrow Swiper";
+
+// 可配置参数
+interface SlideItem {
+  image: string;
+  alt?: string;
+}
+
+// 示例数据
+const swiperTitle = "按键自定义，沟通不设限";
+const slides: SlideItem[] = [
+  { image: "https://placehold.co/956x627", alt: "Slide 1" },
+  { image: "https://placehold.co/956x627", alt: "Slide 2" },
+  { image: "https://placehold.co/956x627", alt: "Slide 3" },
+];
+
+// 组件唯一标识（用于多实例场景）
+const componentId = "arrow-swiper-1";
+---
+
+<DefaultLayout pageTitle={pageTitle}>
+  <div class="arrow-swiper-section">
+    <!-- PC端内容 -->
+    <div class="pc-content">
+      <div class="container">
+        <div class="text-box" id={`${componentId}-calculator`}>
+          <div class="title">{swiperTitle}</div>
+        </div>
+      </div>
+      <div class="arrow-swiper-footer">
+        <div class="swiper-container swiper arrow-swiper" data-swiper-id={componentId}>
+          <div class="swiper-wrapper">
+            {
+              slides.map((slide, index) => (
+                <div class="swiper-slide">
+                  <img
+                    decoding="async"
+                    loading="lazy"
+                    src={slide.image}
+                    alt={slide.alt || `Slide ${index + 1}`}
+                  />
+                </div>
+              ))
+            }
+          </div>
+
+          <!-- 左箭头按钮 -->
+          <div class="swiper-button-prev">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+            >
+              <circle cx="16" cy="16" r="16" fill="white" fill-opacity="0.2"
+              ></circle>
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M13.9155 9.73294C14.2963 9.35216 14.9136 9.35216 15.2944 9.73294L20.4124 14.8509C21.047 15.4855 21.047 16.5145 20.4124 17.1491L15.2944 22.2671C14.9136 22.6478 14.2963 22.6478 13.9155 22.2671C13.5347 21.8863 13.5347 21.2689 13.9155 20.8881L18.8036 16L13.9155 11.1119C13.5347 10.7311 13.5347 10.1137 13.9155 9.73294Z"
+                fill="white"></path>
+            </svg>
+          </div>
+          <!-- 右箭头按钮 -->
+          <div class="swiper-button-next">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+            >
+              <circle cx="16" cy="16" r="16" fill="white" fill-opacity="0.2"
+              ></circle>
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M13.9155 9.73294C14.2963 9.35216 14.9136 9.35216 15.2944 9.73294L20.4124 14.8509C21.047 15.4855 21.047 16.5145 20.4124 17.1491L15.2944 22.2671C14.9136 22.6478 14.2963 22.6478 13.9155 22.2671C13.5347 21.8863 13.5347 21.2689 13.9155 20.8881L18.8036 16L13.9155 11.1119C13.5347 10.7311 13.5347 10.1137 13.9155 9.73294Z"
+                fill="white"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 移动端内容（可选：显示静态图片） -->
+    <div class="mobile-content">
+      {
+        slides.map((slide, index) => (
+          <img
+            decoding="async"
+            loading="lazy"
+            src={slide.image}
+            alt={slide.alt || `Slide ${index + 1}`}
+          />
+        ))
+      }
+    </div>
+  </div>
+</DefaultLayout>
+
+<script>
+  import "../../scripts/pages/ArrowSwiper.js";
+</script>
+

@@ -1,0 +1,195 @@
+/**
+ * Hollyland Arrow Swiper
+ * 箭头导航轮播图组件样式
+ */
+
+.hl-arrow-swiper {
+  // 组件主容器
+  .arrow-swiper-section {
+    padding-top: 120px;
+    background: var(--bg-color, #000);
+
+    // PC端内容
+    .pc-content {
+      width: 100%;
+      display: block;
+    }
+
+    // 移动端内容
+    .mobile-content {
+      display: none;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        -webkit-user-drag: none;
+        -khtml-user-drag: none;
+        -moz-user-drag: none;
+        -o-user-drag: none;
+      }
+    }
+
+    // 响应式切换
+    @media screen and (max-width: 991.98px) {
+      .pc-content {
+        display: none;
+      }
+
+      .mobile-content {
+        display: block;
+      }
+    }
+
+    @media screen and (max-width: 992px) {
+      padding-top: 80px;
+    }
+
+    // 标题容器
+    .container {
+      display: flex;
+      justify-content: center;
+
+      .text-box {
+        width: 80%;
+
+        @media screen and (max-width: 992px) {
+          width: 100%;
+        }
+      }
+
+      .title {
+        color: var(--title-color, #fff);
+        text-align: center;
+        font-family: "HarmonyOS Sans SC";
+        font-size: 46px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 160%;
+        letter-spacing: 1.38px;
+
+        @media screen and (max-width: 992px) {
+          font-size: 24px;
+        }
+      }
+    }
+
+    // Swiper容器
+    .arrow-swiper-footer {
+      padding-top: 50px;
+
+      @media screen and (max-width: 768px) {
+        padding-top: 32px;
+      }
+
+      .swiper-container.arrow-swiper {
+        border-radius: 0;
+        padding-bottom: 70px;
+
+        .swiper-wrapper {
+          display: flex;
+
+          .swiper-slide {
+            width: auto;
+            height: 627px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            transition: opacity 0.5s;
+
+            // 禁止选中和拖拽
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+
+            @media screen and (max-width: 1100px) {
+              gap: 20px;
+            }
+
+            // 非活动slide透明度
+            &:not(.swiper-slide-active) {
+              opacity: 0.3;
+            }
+          }
+
+          img {
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+
+        // 导航按钮通用样式
+        .swiper-button-next,
+        .swiper-button-prev {
+          margin-top: 0;
+          width: 32px;
+          height: 32px;
+          top: auto;
+          bottom: 10px;
+          z-index: 11;
+          cursor: pointer;
+
+          @media screen and (max-width: 768px) {
+            display: none;
+            width: 20px;
+            height: 20px;
+          }
+
+          // 悬停效果
+          &:hover {
+            svg circle {
+              fill-opacity: 0.4;
+            }
+          }
+
+          // 过渡动画
+          svg circle {
+            transition: fill-opacity 0.3s ease;
+          }
+        }
+
+        // 左箭头旋转
+        .swiper-button-prev {
+          left: auto;
+          transform: rotate(180deg);
+        }
+
+        // 隐藏默认箭头
+        .swiper-button-prev::after,
+        .swiper-button-next::after {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+// 亮色主题变体
+.hl-arrow-swiper.light-theme {
+  .arrow-swiper-section {
+    --bg-color: #f5f5f7;
+    --title-color: #151413;
+
+    .swiper-container.arrow-swiper {
+      .swiper-button-next,
+      .swiper-button-prev {
+        svg circle {
+          fill: #000;
+          fill-opacity: 0.1;
+        }
+
+        svg path {
+          fill: #333;
+        }
+      }
+    }
+  }
+}
+
