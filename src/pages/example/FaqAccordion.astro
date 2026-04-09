@@ -1,0 +1,128 @@
+---
+/**
+ * Hollyland FAQ Accordion
+ * 手风琴动画、搜索、复制链接、键盘导航
+ */
+
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+import "../../styles/pages/FaqAccordion.scss";
+
+const pageTitle = "HL FAQ Accordion";
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+const sectionTitle = "常见问题";
+const sectionSubtitle = "下单前你可能想了解这些";
+
+const items: FaqItem[] = [
+  {
+    question: "活动价与划线价如何理解？",
+    answer:
+      "活动价为当前大促期间的优惠售价；划线价为厂商建议零售价或历史标价，仅供参考。具体以结算页为准。",
+  },
+  {
+    question: "下单后多久发货？",
+    answer:
+      "现货订单一般在付款后 48 小时内发出；预售商品以商品详情页说明为准。节假日与大促期间可能顺延，请以物流更新为准。",
+  },
+  {
+    question: "是否支持 7 天无理由退货？",
+    answer:
+      "符合法律法规及平台规则的条件下支持。若产品激活、拆封后影响二次销售，可能不适用无理由退货，详见售后政策。",
+  },
+  {
+    question: "海外地区能否购买？",
+    answer:
+      "当前示例页为演示文案。实际销售区域、税费与配送请以官网商城结算流程为准，或联系在线客服确认。",
+  },
+];
+---
+
+<DefaultLayout pageTitle={pageTitle}>
+  <section class="faq-section" id="faq" aria-labelledby="faq-heading" data-faq-root>
+    <div class="faq-bg" aria-hidden="true"></div>
+    <div class="container">
+      <header class="faq-header">
+        <h2 id="faq-heading" class="faq-title">{sectionTitle}</h2>
+        <p class="faq-subtitle">{sectionSubtitle}</p>
+      </header>
+
+      <div class="faq-search-wrap">
+        <label class="faq-search-label visually-hidden" for="faq-search-input">搜索问题</label>
+        <input
+          id="faq-search-input"
+          class="faq-search-input"
+          type="search"
+          placeholder="搜索问题关键词…"
+          autocomplete="off"
+          data-faq-search
+        />
+      </div>
+
+      <div class="faq-list" data-faq-list>
+        {
+          items.map((item, index) => {
+            const n = index + 1;
+            const panelId = `faq-panel-${n}`;
+            const buttonId = `faq-btn-${n}`;
+            const idx = String(n).padStart(2, "0");
+            return (
+              <div class="faq-item" id={`faq-item-${n}`} data-faq-index={n}>
+                <h3 class="faq-item-heading">
+                  <button
+                    type="button"
+                    id={buttonId}
+                    class="faq-trigger"
+                    aria-expanded="false"
+                    aria-controls={panelId}
+                    data-faq-trigger
+                  >
+                    <span class="faq-trigger-index" aria-hidden="true">
+                      {idx}
+                    </span>
+                    <span class="faq-trigger-text">{item.question}</span>
+                    <span class="faq-trigger-icon" aria-hidden="true" />
+                  </button>
+                </h3>
+                <div
+                  id={panelId}
+                  class="faq-panel"
+                  role="region"
+                  aria-labelledby={buttonId}
+                  aria-hidden="true"
+                  inert
+                >
+                  <div class="faq-panel-motion">
+                    <div class="faq-panel-inner">
+                      <p class="faq-answer-text">{item.answer}</p>
+                      <div class="faq-panel-actions">
+                        <button
+                          type="button"
+                          class="faq-copy-link"
+                          data-faq-copy={n}
+                        >
+                          复制本条链接
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+
+    <div class="faq-toast" data-faq-toast hidden role="status" aria-live="polite">
+      链接已复制
+    </div>
+  </section>
+</DefaultLayout>
+
+<script>
+  import "../../scripts/pages/FaqAccordion.js";
+</script>

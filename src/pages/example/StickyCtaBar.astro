@@ -1,0 +1,294 @@
+---
+/**
+ * Hollyland Sticky CTA Bar — 高密度促销落地结构 + 底栏
+ */
+
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+import "../../styles/pages/StickyCtaBar.scss";
+
+const pageTitle = "HL Sticky CTA Bar";
+
+const productName = "Lark 150";
+const productSub = "一拖二无线麦克风";
+const priceCurrent = "¥1,499";
+const priceOriginal = "¥1,899";
+const saveAmount = "400";
+const ctaPrimary = "立即抢购";
+const ctaSecondary = "领券";
+const thumbSrc = "https://placehold.co/72x72/1a1a1a/e2211c?text=HL";
+const ctaPrimaryHref = "#checkout-demo";
+const ctaSecondaryHref = "#coupon-demo";
+
+const stats = [
+  { v: "300m", l: "传输距离" },
+  { v: "<25ms", l: "延迟" },
+  { v: "8h+", l: "续航" },
+  { v: "4K+", l: "累计好评" },
+];
+
+const features = [
+  { t: "磁吸快拆", d: "一秒安装防风毛衣与夹具，户外收音更稳。" },
+  { t: "机内备份", d: "发射端本地录制，断频也不丢一条素材。" },
+  { t: "监听低延迟", d: "耳机实时返听，口型与声音同步。" },
+];
+
+const timeline = ["下单即锁定活动价", "48h 内顺丰揽收", "签收后享官方质保"];
+---
+
+<DefaultLayout pageTitle={pageTitle}>
+  <div class="sticky-cta-page" data-sticky-cta-page>
+    <section class="sticky-cta-hero" data-sticky-cta-hero aria-label="活动首屏">
+      <div class="sticky-cta-hero-grid">
+        <div class="container sticky-cta-hero-inner">
+          <div class="sticky-cta-hero-copy">
+            <p class="sticky-cta-hero-kicker">
+              <span class="sticky-cta-kicker-dot" aria-hidden="true"></span>
+              春季大促 · 限时直降
+            </p>
+            <h1 class="sticky-cta-hero-title">
+              <span class="sticky-cta-hero-name">{productName}</span>
+              <span class="sticky-cta-hero-sub">{productSub}</span>
+            </h1>
+            <p class="sticky-cta-hero-desc">
+              首屏滚出后底部悬浮条与阅读进度激活。以下为高密度模块演示，已压缩纵向留白便于一屏浏览更多结构。
+            </p>
+            <ul class="sticky-cta-hero-bullets" aria-label="卖点摘要">
+              <li>300m 稳定传输</li>
+              <li>超低延迟监听</li>
+              <li>机内备份录音</li>
+              <li>一键降噪</li>
+            </ul>
+          </div>
+          <div class="sticky-cta-hero-visual" aria-hidden="true">
+            <div class="sticky-cta-hero-card">
+              <div class="sticky-cta-hero-glow"></div>
+              <div class="sticky-cta-hero-ring"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sticky-cta-strip" aria-label="核心数据">
+      <div class="container-fluid px-3 px-lg-4">
+        <ul class="sticky-cta-strip-list">
+          {
+            stats.map((s) => (
+              <li class="sticky-cta-strip-item">
+                <span class="sticky-cta-strip-val">{s.v}</span>
+                <span class="sticky-cta-strip-lab">{s.l}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section
+      class="sticky-cta-features"
+      aria-labelledby="sticky-cta-feat-title"
+    >
+      <div class="container py-0">
+        <h2 id="sticky-cta-feat-title" class="sticky-cta-features-title">
+          三大场景优势
+        </h2>
+        <div class="sticky-cta-features-grid">
+          {
+            features.map((f) => (
+              <article class="sticky-cta-feature-card">
+                <h3 class="sticky-cta-feature-t">{f.t}</h3>
+                <p class="sticky-cta-feature-d">{f.d}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="sticky-cta-timeline" aria-label="购物流程">
+      <div class="container">
+        <ol class="sticky-cta-timeline-list">
+          {
+            timeline.map((step, i) => (
+              <li class="sticky-cta-timeline-item">
+                <span class="sticky-cta-timeline-idx">{i + 1}</span>
+                <span class="sticky-cta-timeline-txt">{step}</span>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section class="sticky-cta-quote" aria-label="用户评价摘要">
+      <div class="container">
+        <blockquote class="sticky-cta-quote-inner">
+          <p>「人声干净、底噪控制惊喜，访谈一条过。大促价入手很值。」</p>
+          <footer>— 示例用户 · 独立创作者</footer>
+        </blockquote>
+      </div>
+    </section>
+    <aside class="sticky-cta-devdoc" aria-label="组件使用说明（开发）">
+      <div class="container">
+        <h2 class="sticky-cta-devdoc-title">StickyCtaBar 使用说明</h2>
+        <p class="sticky-cta-devdoc-lead">
+          复制本页结构时，请一并维护下列文件与约定，便于快速定位逻辑。
+        </p>
+        <dl class="sticky-cta-devdoc-dl">
+          <dt>相关文件</dt>
+          <dd>
+            <code>src/pages/example/StickyCtaBar.astro</code
+            >（结构与文案常量）<br />
+            <code>src/styles/pages/StickyCtaBar.scss</code>（样式，根选择器
+            <code>.hl-sticky-cta-bar</code> 由 <code>pageTitle</code> 生成）<br
+            />
+            <code>src/scripts/pages/StickyCtaBar.js</code>（首屏显隐、阅读进度）
+          </dd>
+          <dt>正文区可调参数（frontmatter）</dt>
+          <dd>
+            <code>productName</code>、<code>productSub</code>、<code
+              >priceCurrent</code
+            >、<code>priceOriginal</code>、<code>saveAmount</code>、<code
+              >ctaPrimary</code
+            > / <code>ctaSecondary</code>、<code>thumbSrc</code>、<code
+              >ctaPrimaryHref</code
+            > / <code>ctaSecondaryHref</code>；数据条与模块数组：<code
+              >stats</code
+            >、<code>features</code>、<code>timeline</code>。
+          </dd>
+          <dt>固定 data 钩子（勿删改键名）</dt>
+          <dd>
+            <code>data-sticky-cta-hero</code
+            >：首屏区域，滚出视口后显示底栏；<code>data-sticky-cta-bar</code
+            >：底栏根节点；<code>data-sticky-cta-page</code
+            >：底栏出现时增加底部内边距，避免内容被遮挡；<code
+              >data-sticky-cta-progress</code
+            >：顶栏阅读进度条（scaleX）。
+          </dd>
+          <dt>行为摘要</dt>
+          <dd>
+            <code>IntersectionObserver</code> 监听首屏，非相交时底栏加类 <code
+              >is-visible</code
+            >；滚动时用
+            <code>scrollY / (scrollHeight - innerHeight)</code> 更新进度条 transform。
+          </dd>
+        </dl>
+      </div>
+    </aside>
+
+    <section
+      class="sticky-cta-content"
+      aria-labelledby="sticky-cta-content-title"
+    >
+      <div class="container">
+        <h2 id="sticky-cta-content-title" class="sticky-cta-content-title">
+          长文说明区
+        </h2>
+        <p class="sticky-cta-content-lead">
+          以下段落用于拉长页面以观察底栏进度条；段落间距已收紧。
+        </p>
+        {
+          Array.from({ length: 12 }).map((_, i) => (
+            <p class="sticky-cta-content-text">
+              <span class="sticky-cta-content-num">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              Hollyland
+              无线系统支持多机位协同与手机直连。大促期间赠品与券规则以活动页公示为准；库存紧张时可能改为预售，请留意商详提示。
+            </p>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+
+  <div
+    class="sticky-cta-dock"
+    data-sticky-cta-bar
+    role="region"
+    aria-label="购买与优惠"
+    aria-hidden="true"
+  >
+    <div class="sticky-cta-dock-progress" aria-hidden="true">
+      <span class="sticky-cta-dock-progress-bar" data-sticky-cta-progress
+      ></span>
+    </div>
+    <div class="sticky-cta-dock-inner">
+      <div class="container sticky-cta-dock-row">
+        <div class="sticky-cta-dock-product">
+          <img
+            class="sticky-cta-dock-thumb"
+            src={thumbSrc}
+            alt=""
+            width="72"
+            height="72"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="sticky-cta-dock-meta">
+            <div class="sticky-cta-dock-title-row">
+              <span class="sticky-cta-dock-name">{productName}</span>
+              <span class="sticky-cta-dock-pill">省 ¥{saveAmount}</span>
+            </div>
+            <span class="sticky-cta-dock-sub">{productSub}</span>
+            <ul class="sticky-cta-dock-trust" aria-label="服务承诺">
+              <li>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M12 2l2.4 7.4H22l-6 4.6 2.3 7L12 17.8 5.7 21l2.3-7-6-4.6h7.6L12 2z"
+                    fill="currentColor"></path>
+                </svg>
+                官方正品
+              </li>
+              <li>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 12h3l2-7 4 14 2-7h7"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </svg>
+                顺丰速发
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sticky-cta-dock-price-block">
+          <div class="sticky-cta-dock-price-row">
+            <span class="sticky-cta-dock-price-current">{priceCurrent}</span>
+            <span class="sticky-cta-dock-price-original">{priceOriginal}</span>
+          </div>
+          <span class="sticky-cta-dock-price-note">大促价 · 以结算页为准</span>
+        </div>
+
+        <div class="sticky-cta-dock-actions">
+          <a class="sticky-cta-dock-btn secondary" href={ctaSecondaryHref}>
+            {ctaSecondary}
+          </a>
+          <a class="sticky-cta-dock-btn primary" href={ctaPrimaryHref}>
+            {ctaPrimary}
+            <span class="sticky-cta-dock-btn-shine" aria-hidden="true"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</DefaultLayout>
+
+<script>
+  import "../../scripts/pages/StickyCtaBar.js";
+</script>

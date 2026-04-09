@@ -1,0 +1,175 @@
+---
+/**
+ * Hollyland Specs Compare
+ * 规格对比 + 导出/复制/紧凑视图/列高亮/单元格复制
+ */
+
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+import "../../styles/pages/SpecsCompare.scss";
+
+const pageTitle = "HL Specs Compare";
+
+interface CompareColumn {
+  id: string;
+  name: string;
+  badge?: string;
+  recommended?: boolean;
+}
+
+interface CompareRow {
+  label: string;
+  values: Record<string, string>;
+}
+
+const sectionTitle = "套餐对比";
+const sectionSubtitle = "选择适合你的拍摄方案";
+
+const columns: CompareColumn[] = [
+  { id: "lite", name: "Lark 套装 Lite", badge: "入门" },
+  { id: "pro", name: "Lark 套装 Pro", badge: "热卖", recommended: true },
+  { id: "max", name: "Lark 套装 Max" },
+];
+
+const rows: CompareRow[] = [
+  {
+    label: "活动价",
+    values: {
+      lite: "¥999",
+      pro: "¥1,499",
+      max: "¥1,999",
+    },
+  },
+  {
+    label: "续航",
+    values: { lite: "8 小时", pro: "10 小时", max: "10 小时" },
+  },
+  {
+    label: "传输距离",
+    values: { lite: "100m", pro: "300m", max: "300m" },
+  },
+  {
+    label: "机内录音",
+    values: { lite: "—", pro: "支持", max: "支持" },
+  },
+  {
+    label: "充电盒",
+    values: { lite: "无", pro: "有", max: "有" },
+  },
+  {
+    label: "蓝牙版本",
+    values: { lite: "5.2", pro: "5.2", max: "5.2" },
+  },
+  {
+    label: "品牌",
+    values: { lite: "Hollyland", pro: "Hollyland", max: "Hollyland" },
+  },
+];
+---
+
+<DefaultLayout pageTitle={pageTitle}>
+  <section
+    class="specs-compare-section"
+    aria-labelledby="specs-compare-heading"
+    data-specs-compare-root
+  >
+    <div class="specs-compare-deco" aria-hidden="true"></div>
+    <div class="container">
+      <header class="specs-compare-header">
+        <h2 id="specs-compare-heading" class="specs-compare-title">{sectionTitle}</h2>
+        <p class="specs-compare-subtitle">{sectionSubtitle}</p>
+      </header>
+
+      <div class="specs-compare-toolbar">
+        <div class="specs-compare-toolbar-left">
+          <label class="specs-compare-diff-label">
+            <input type="checkbox" class="specs-compare-diff-toggle" data-specs-diff-toggle />
+            <span>仅显示不同</span>
+          </label>
+          <label class="specs-compare-diff-label">
+            <input type="checkbox" class="specs-compare-sticky-toggle" data-specs-sticky-col />
+            <span>冻结首列增强</span>
+          </label>
+        </div>
+        <div class="specs-compare-tools">
+          <button type="button" class="specs-tool-btn" data-specs-export-csv>
+            导出 CSV
+          </button>
+          <button type="button" class="specs-tool-btn" data-specs-copy-tsv>
+            复制表格
+          </button>
+          <button
+            type="button"
+            class="specs-tool-btn"
+            data-specs-toggle-compact
+            aria-pressed="false"
+          >
+            紧凑视图
+          </button>
+        </div>
+        <p class="specs-compare-diff-hint" data-specs-diff-hint aria-live="polite"></p>
+      </div>
+
+      <p class="specs-compare-tip">提示：鼠标悬停表头可高亮整列；点击数据单元格可复制内容。</p>
+
+      <div class="specs-compare-scroll" data-specs-scroll>
+        <table class="specs-compare-table">
+          <caption class="visually-hidden">
+            {sectionTitle}，共 {columns.length} 列产品对比
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col" class="specs-compare-th-corner">对比项</th>
+              {
+                columns.map((col) => (
+                  <th
+                    scope="col"
+                    class:list={[
+                      "specs-compare-th-product",
+                      { "is-recommended": col.recommended },
+                    ]}
+                    data-col-id={col.id}
+                  >
+                    <span class="specs-compare-product-name">{col.name}</span>
+                    {col.badge && (
+                      <span class="specs-compare-badge">{col.badge}</span>
+                    )}
+                    {col.recommended && (
+                      <span class="specs-compare-rec visually-hidden">当前活动主推套餐</span>
+                    )}
+                  </th>
+                ))
+              }
+            </tr>
+          </thead>
+          <tbody>
+            {
+              rows.map((row, idx) => (
+                <tr class="specs-compare-row" data-specs-row={idx}>
+                  <th scope="row" class="specs-compare-th-row">
+                    {row.label}
+                  </th>
+                  {columns.map((col) => (
+                    <td
+                      class:list={["specs-compare-td", { "is-recommended-col": col.recommended }]}
+                      data-col-id={col.id}
+                      tabindex="0"
+                      title="点击复制该格内容"
+                    >
+                      {row.values[col.id] ?? "—"}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="specs-toast" data-specs-toast hidden role="status" aria-live="polite"></div>
+  </section>
+</DefaultLayout>
+
+<script>
+  import "../../scripts/pages/SpecsCompare.js";
+</script>
